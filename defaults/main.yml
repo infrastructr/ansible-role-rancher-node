@@ -1,0 +1,11 @@
+---
+rancher_node_master_api_token: "{{ rancher_api_token }}"
+rancher_node_master_group: paas_master
+rancher_node_master_host: "{{ hostvars[groups[rancher_node_master_group][0]]['ansible_host'] }}"
+rancher_node_master_url: "https://{{ rancher_node_master_host }}"
+rancher_node_cluster_id: "{{ rancher_cluster_id }}"
+rancher_node_validate_certs: no
+rancher_node_retries: 10
+rancher_node_delay: 30
+rancher_node_address: ''
+rancher_node_internal_address: ''

@@ -1,0 +1,15 @@
+---
+- name: Ensure node is active
+  uri:
+    url: "{{ rancher_node_master_url }}/v3/nodes?hostname={{ inventory_hostname | lower }}"
+    headers:
+      Authorization: "Bearer {{ rancher_node_master_api_token }}"
+    validate_certs: "{{ rancher_node_validate_certs }}"
+  register: node_list
+  until: |-
+    (node_list.json.data | length > 0)
+    and
+    (node_list.json.data[0].state == 'active')
+  retries: "{{ rancher_node_retries }}"
+  delay: "{{ rancher_node_delay }}"
+  delegate_to: localhost

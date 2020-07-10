@@ -1,0 +1,4 @@
+ansible_python_interpreter: /usr/bin/python3.7
+
+test_rancher_node_base_group: paas
+test_rancher_node_cluster_group: paas_cluster

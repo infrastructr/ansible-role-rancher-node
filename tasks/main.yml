@@ -1,0 +1,14 @@
+---
+- import_tasks: read.yml
+  tags: [rancher, rancher_node]
+
+- import_tasks: read_registration_command.yml
+  when: create_node
+  tags: [rancher, rancher_node]
+
+- import_tasks: create.yml
+  when: create_node
+  tags: [rancher, rancher_node]
+
+- import_tasks: ensure_active.yml
+  tags: [rancher, rancher_node]

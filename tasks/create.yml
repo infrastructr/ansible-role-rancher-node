@@ -1,0 +1,3 @@
+---
+- name: Register node at Rancher
+  shell: "{{ node_registration_command }}"

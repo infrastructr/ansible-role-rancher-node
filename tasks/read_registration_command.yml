@@ -1,0 +1,21 @@
+---
+- name: Get node registration command
+  uri:
+    url: '{{ rancher_node_master_url }}/v3/clusterregistrationtoken'
+    method: POST
+    body: {"type":"clusterRegistrationToken", "clusterId":"{{ rancher_node_cluster_id }}"}
+    status_code: 201
+    body_format: json
+    headers:
+      Authorization: "Bearer {{ rancher_node_master_api_token }}"
+    validate_certs: "{{ rancher_node_validate_certs }}"
+  register: node_registration_command_result
+
+- name: Set node registration command
+  set_fact:
+    node_registration_command: "{{ node_registration_command_result.json.nodeCommand[5:] }} \
+    --node-name  {{ inventory_hostname | lower }} \
+    {{ (rancher_node_address | length > 0) | ternary('--address ' + rancher_node_address, '') }} \
+    {{ (rancher_node_internal_address | length > 0) | ternary('--internal-address ' + rancher_node_internal_address, '') }} \
+    --etcd --controlplane --worker
+    "

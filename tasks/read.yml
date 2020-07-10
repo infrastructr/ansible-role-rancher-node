@@ -1,0 +1,20 @@
+---
+- name: Get node list
+  delegate_to: localhost
+  uri:
+      url: '{{ rancher_node_master_url }}/v3/nodes?limit=-1&sort=name,hostname'
+      body_format: json
+      headers:
+          Authorization: "Bearer {{ rancher_node_master_api_token }}"
+      validate_certs: "{{ rancher_node_validate_certs }}"
+  register: node_list_result
+
+- name:  Set create_node variable
+  set_fact:
+    create_node: "{{ \
+      node_list_result.json.data \
+      | selectattr('clusterId', 'equalto', rancher_node_cluster_id) \
+      | selectattr('requestedHostname', 'equalto', (inventory_hostname | lower)) \
+      | list \
+      | length == 0 \
+    }}"

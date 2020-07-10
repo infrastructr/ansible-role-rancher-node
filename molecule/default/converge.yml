@@ -1,0 +1,6 @@
+---
+- name: Configure hosts
+  hosts: paas_node
+  become: yes
+  roles:
+    - role: ansible-role-rancher-node

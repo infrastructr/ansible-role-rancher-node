@@ -1,0 +1,11 @@
+- name: Cleanup generated vars
+  hosts: localhost
+  tasks:
+    - name: Remove PaaS group vars
+      file:
+        path: "inventory/group_vars/{{ test_rancher_node_base_group }}/rancher_generated.yml"
+        state: absent
+    - name: Remove PaaS cluster group vars
+      file:
+        path: "inventory/group_vars/{{ test_rancher_node_cluster_group }}/rancher_generated.yml"
+        state: absent

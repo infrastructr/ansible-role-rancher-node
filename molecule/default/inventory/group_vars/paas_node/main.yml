@@ -1,0 +1,3 @@
+vlan_ip: 172.0.0.2
+rancher_node_address: eth0
+rancher_node_internal_address: vlan0
