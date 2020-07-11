@@ -51,8 +51,7 @@ Node address.
 
 ## Dependencies
 
-- [geerlingguy.pip](https://galaxy.ansible.com/geerlingguy/pip)
-- [geerlingguy.docker](https://galaxy.ansible.com/geerlingguy/docker)
+None.
 
 ## Example Playbook
 
