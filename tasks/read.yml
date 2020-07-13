@@ -1,6 +1,5 @@
 ---
 - name: Get node list
-  delegate_to: localhost
   uri:
       url: '{{ rancher_node_master_url }}/v3/nodes?limit=-1&sort=name,hostname'
       body_format: json
